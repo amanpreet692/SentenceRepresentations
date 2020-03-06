@@ -1,8 +1,6 @@
-This file is best viewed in Markdown reader (eg. https://jbt.github.io/markdown-editor/)
-
 # Installation
 
-This assignment is implemented in python 3.6 and tensorflow 2.0. Follow these steps to setup your environment:
+This project is implemented in python 3.6 and tensorflow 2.0. Follow these steps to setup your environment:
 
 1. [Download and install Conda](http://https://conda.io/projects/conda/en/latest/user-guide/install/index.html "Download and install Conda")
 2. Create a Conda environment with Python 3.6
@@ -23,11 +21,6 @@ pip install -r requirements.txt
 ```
 ./download_glove.sh
 ```
-
-**NOTE:** We will be using this environment to check your code, so please don't work in your default or any other python environment.
-
-We have used type annotations in the code to help you know the method signatures. Although, we wouldn't require you to type annotate your python code, knowing types might help know what is expected. You can know more about type annotations [here](https://docs.python.org/3/library/typing.html "here").
-
 # Data
 
 There are two classification datasets in this assignment stored in `data/` directory:
@@ -38,7 +31,7 @@ There are two classification datasets in this assignment stored in `data/` direc
  - There are different sized samples of the training set :
 `imdb_sentiment_train_5k.jsonl`,  `imdb_sentiment_train_10k.jsonl` etc.
 
-- **Bigram Order:**: It's a binary classification of wheter bigram is in correct order or reversed. For example, `New York` would be 1 and `York New` would be 0. It's in the same format as the imdb sentiment dataset.
+- **Bigram Order:**: It's a binary classification of whether bigram is in correct order or reversed. For example, `New York` would be 1 and `York New` would be 0. It's in the same format as the imdb sentiment dataset.
  - The train, dev, test files are `bigram_order_train.jsonl`, `bigram_order_dev.jsonl` and `bigram_order_test.jsonl`.
 
 
@@ -64,8 +57,6 @@ There are two kinds of models in this code: main and probing.
 ## Operate on Model:
 
 The following scripts help you operate on these models: `train.py`, `predict.py`, `evaluate.py`. To understand how to use them, simply run `python train.py -h`, `python predict.py -h` etc and it will show you how to use these scripts. We will give you a high-level overview below though:
-
-**Caveat:** The command examples below demonstrate how to use them *after filling-up* the expected code in the model code files. They won't work before that.
 
 ### Train:
 
@@ -125,54 +116,6 @@ python train.py probing \
                   --num-epochs 5 \
                   --layer-num 3
 ```
-
-Similarly, you can also probe the same model on bigram-classification task by just replacing the datasets in the above command.
-
-### Analysis:
-
-There are four scripts in the code that will allow you to do analyses on the sentence representations:
-
-1. plot_performance_against_data_size.py
-2. plot_probing_performances_on_sentiment_task.py
-3. plot_probing_performances_on_bigram_order_task.py
-4. plot_perturbation_analysis.py
-
-To run each of these, you would require to first train models in specific configurations. Each script has different requirements. Running these scripts would tell you these requirements are and what training/predicting commands need to be completed before generating the analysis plot. If you are half-done, it will tell you what commands are remaining yet.
-
-Before you start with plot/analysis section make sure to clean-up your `serialization_dirs` directory, because the scripts identify what commands are to be run based on serialization directory names found in it. After a successful run, you should be able to see some corresponding plots in `plots/` directory.
-
-Following section briefs what are the requirements of each script:
-
-#### Performance against data size:
-
-Compare the validation accuracy of DAN and GRU based models across 3 different training dataset sizes on sentiment analysis task.
-
-#### Probing Performances on Sentiment Task
-
-Probe DAN and GRU models at different layers and analyse how they perform on sentiment analysis task.
-
-#### Probing Performances on Bigram Order Task
-
-Probe DAN and GRU models at final layer and compare how they perform on Bigram Order classification task.
-
-#### Perturbation Analysis
-
-For a sample sentence "`the film performances were awesome`", change the word awesome to `worst`, `okay` and `cool`, and see how the learnt representations change at different layers for DAN and GRU models.
-
-
-Lastly, you are also supposed to train DAN for more epochs and say something about training and the validation losses from the tensorboard. For this, run the script:
-
-```
-./train_dan_for_long.sh
-```
-
-and check train/validation losses on the tensorboard (`http://localhost:6006/`) after running:
-
-```
-tensorboard --logdir serialization_dirs/main_dan_5k_with_emb_for_50k
-```
-
-Note: If you run training multiple times with same name, make sure to clean-up tensorboard directory. Or else, it will have multiple plots in same chart.
 
 
 # Expectations
