@@ -120,7 +120,7 @@ python train.py probing \
 
 # Implementation
 
-1. Deep Averaging Network: (of n layers and p dropout)
+1. Deep Averaging Network: (of n layers and p dropout)   
 **Ref:** https://people.cs.umass.edu/ miyyer/pubs/2015acldan:pdf
 
 2. GRU Encoder: (of n layers):
